@@ -17,15 +17,16 @@ function Add() {
     let jsonContent = {"name": inputContent[0], "email": inputContent[1], "dob": inputContent[2]};
 
 
-    const response = await fetch("http://localhost:8080/api/v1/student/add", {
-      method: "Post",
+    const response = await fetch("http://localhost:8080/api/v1/student/", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(jsonContent)
-    } )
+    });
 
-    console.log(response.json());
+    const data = await response.json();
+    console.log(data);
   }
 
   return (

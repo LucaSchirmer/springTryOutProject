@@ -30,7 +30,15 @@ public class StudentConfig {
                             5)
             );
 
-            studentRepository.saveAll(List.of(Alex, Marlene));
+            Student TINA = new Student(
+                    "TINA",
+                    "TINA@gmail.com",
+                    LocalDate.of(2013,
+                            Month.MARCH,
+                            1)
+            );
+
+            studentRepository.saveAll(List.of(Alex, Marlene, TINA));
         };
     }
 }
