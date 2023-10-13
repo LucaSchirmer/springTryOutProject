@@ -1,5 +1,6 @@
 package com.example.demo.student;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
+
 public class StudentController {
 
     private final StudentService studentService;
@@ -33,14 +35,14 @@ public class StudentController {
     public ResponseEntity<Object> registerNewStudent(@RequestBody Student student) {
         try {
             studentService.addNewStudent(student);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Student added successfully");
+            return ResponseEntity.status(HttpStatus.CREATED).contentType(MediaType.APPLICATION_JSON).body("Student added successfully");
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception for debugging
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add student: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.APPLICATION_JSON).body("Failed to add student: " + e.getMessage());
         }
     }
 
-    @DeleteMapping(path = "{studentId}")
+    @DeleteMapping("/delete/{studentId}")
     public ResponseEntity<Object> deleteStudent(@PathVariable("studentId") Long studentId) {
         try {
             studentService.deleteStudent(studentId);
