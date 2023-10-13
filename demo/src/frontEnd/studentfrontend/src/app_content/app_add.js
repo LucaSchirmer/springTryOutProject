@@ -16,8 +16,8 @@ function Add() {
 
     let jsonContent = {"name": inputContent[0], "email": inputContent[1], "dob": inputContent[2]};
 
-
-    const response = await fetch("http://localhost:8080/api/v1/student/", {
+    console.log(jsonContent)
+    const response = await fetch("http://localhost:8080/addStudent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,8 +25,14 @@ function Add() {
       body: JSON.stringify(jsonContent)
     });
 
-    const data = await response.json();
-    console.log(data);
+
+    
+    if (response.status === 201) {
+      const data = await response.json();
+      console.log(data);
+    } else {
+      window.alert("An error has occured")
+    }
   }
 
   return (
