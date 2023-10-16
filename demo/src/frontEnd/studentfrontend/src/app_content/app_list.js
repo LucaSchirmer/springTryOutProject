@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-function List() {
-  const [students, setStudents] = useState([]); // State to hold student data
-
-  useEffect(() => {
-    const requestFetch = async () => {
+  export function  requestFetch(setStudents) {
+    return async () => {
       try {
         const response = await fetch("http://localhost:8080/getStudents", {
           method: "GET",
@@ -14,14 +11,24 @@ function List() {
         });
 
         const data = await response.json();
-        setStudents(data); // Set the student data in the state
+        setStudents(data);
       } catch (error) {
         console.log(error);
       }
-    };
+    }
+  };
 
-    requestFetch();
-  }, []); // Empty dependency array to run the effect only once
+
+
+function List() {
+  const [students, setStudents] = useState([]);
+
+  const fetchData = requestFetch(setStudents);
+
+  useEffect(() => {
+    fetchData();
+  });
+
 
   return (
     <div className="list" id="List">

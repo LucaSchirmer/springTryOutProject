@@ -1,6 +1,10 @@
 import Input from './snippets/input'
+import { requestFetch } from './app_list.js';
 
-function Delete() {
+function Delete({handleListReload}) {
+
+  const fetchData = requestFetch(handleListReload)
+
     
   async function handleDelete(id) {
 
@@ -17,8 +21,9 @@ function Delete() {
 
 
       console.log(response);
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         window.alert("Your request was successful!");
+        fetchData()
       } else {
         window.alert(`An error has occured status: ${response.status}`);
       }

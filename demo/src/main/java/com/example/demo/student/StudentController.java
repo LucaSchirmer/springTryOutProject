@@ -46,7 +46,7 @@ public class StudentController {
     public ResponseEntity<Object> deleteStudent(@PathVariable("studentId") Long studentId) {
         try {
             studentService.deleteStudent(studentId);
-            return ResponseEntity.ok("Student deleted successfully");
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("Student deleted successfully");
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete student: " + e.getMessage());

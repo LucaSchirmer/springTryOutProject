@@ -109,6 +109,10 @@ button:hover{
   color: #fff;
 }
 
+.studentItem{
+  display: flex;
+  justify-content: space-evenly;
+}
 .studentItem span{
 
   color: #fff;

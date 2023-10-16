@@ -1,7 +1,10 @@
-import Input from './snippets/input'
+import Input from './snippets/input';
+import { requestFetch } from './app_list.js';
 
-function Add() {
+function Add({handleListReload}) {
   
+
+  const fetchData = requestFetch(handleListReload)
 
   const handleSubmit = async () =>{
 
@@ -33,7 +36,8 @@ function Add() {
   
       console.log(response)
       if (response.status === 201) {
-        window.alert("Your request was successful!")
+        window.alert("Your request was successful!");
+        fetchData();
       } else {
         window.alert(`An error has occured status: ${response.status}`)
       }
